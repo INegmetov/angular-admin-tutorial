@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   submitLogin(){
     this.authService.login(this.loginForm.value).subscribe({
-      next: ()=> this.router.navigate(['adngmin']),
+      next: ()=> this.router.navigate(['admin']),
       error: (err)=>alert(err.message)
     })
     console.log(this.loginForm.value);
@@ -32,8 +32,10 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
       ])
+    })
+    if(this.authService.isLoggedIn()){
+      this.router.navigate(['admin'])
     }
-    )
   }
 
 }
